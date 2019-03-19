@@ -37,6 +37,8 @@ export class DefaultFactory extends BaseFactory {
         }
     }
 
+    formatAttributes(docstring: interfaces.DocstringParts) {}
+
     formatKeywordArguments(docstring: interfaces.DocstringParts) {
         this.appendText("\nKeyword Arguments:\n");
         for (let kwarg of docstring.kwargs) {

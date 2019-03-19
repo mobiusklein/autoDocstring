@@ -26,6 +26,8 @@ export class GoogleFactory extends BaseFactory {
         }
     }
 
+    formatAttributes(docstring: interfaces.DocstringParts) { }
+
     formatArguments(docstring: interfaces.DocstringParts) {
         if (docstring.args.length > 0 || docstring.kwargs.length > 0) {
             this.appendText("\nArgs:\n");

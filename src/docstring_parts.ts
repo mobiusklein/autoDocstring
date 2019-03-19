@@ -1,10 +1,13 @@
+import { type } from "os";
+
 export type DocstringParts = {
-    name: string;
+    name: DocumentableObject;
     decorators: Decorator[];
     args: Argument[];
     kwargs: KeywordArgument[];
     raises: Raises[];
     returns: Returns;
+    attributes: Attribute[];
 }
 
 export type Decorator = {
@@ -29,6 +32,27 @@ export type Raises = {
 export type Returns = {
     type: string;
 }
+
+export type Attribute = {
+    type: string;
+    var: string;
+}
+
+export enum DocumentableObjectType {
+    Variable,
+    Function,
+    Method,
+    Class,
+    Module,
+    Empty
+}
+
+
+export type DocumentableObject = {
+    type: DocumentableObjectType;
+    name: string;
+}
+
 
 export function removeTypes(docstringParts: DocstringParts): void {
     for (let arg of docstringParts.args) {

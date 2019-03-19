@@ -24,6 +24,8 @@ export class SphinxFactory extends BaseFactory {
          // I need to find an example of decorators in sphinx format
     }
 
+    formatAttributes(docstring: interfaces.DocstringParts) { }
+
     formatArguments(docstring: interfaces.DocstringParts) {
         for (let arg of docstring.args) {
             this.appendText(":param " + arg.var + ": ")

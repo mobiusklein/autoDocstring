@@ -28,19 +28,19 @@ export function getDefinition(document: string, linePosition: number): string {
 export function getBody(document: string, linePosition: number): string[] {
     let lines = document.split('\n');
     let body = [];
-
+    let inClass = document.startsWith("class")
     let currentLineNum = linePosition;
     let originalIndentation = indentationOf(lines[currentLineNum]);
-
+    if (inClass) {
+        originalIndentation += 1
+    }
     while (currentLineNum < lines.length) {
         let line = lines[currentLineNum];
-
         if (blankLine(line)) {
             currentLineNum++;
             continue
         };
-
-        if (indentationOf(line) < originalIndentation) {
+        if ((indentationOf(line) < originalIndentation) && (!inClass || (inClass && !(line.match(/^\s+((def)|@|__)/i))))) {
             break
         };
 

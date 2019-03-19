@@ -25,22 +25,38 @@ export class NumpyFactory extends BaseFactory {
     }
 
     formatArguments(docstring: interfaces.DocstringParts) {
-        if (docstring.args.length > 0 || docstring.kwargs.length > 0) {
-            this.appendText("Parameters\n----------\n");
-        }
+            if (docstring.name.type == interfaces.DocumentableObjectType.Class) {
+                return
+            }
+            else if (docstring.args.length > 0 || docstring.kwargs.length > 0) {
+                this.appendText("Parameters\n----------\n");
+                for (let arg of docstring.args) {
+                    this.appendText(arg.var + " : ")
+                    this.appendPlaceholder(`${arg.type}`)
+                    this.appendText("\n")
 
-        for (let arg of docstring.args) {
-            this.appendText(arg.var + " : ")
-            this.appendPlaceholder(`${arg.type}`)
-            this.appendText("\n")
+                    this.appendText("\t")
+                    this.appendPlaceholder("[description]")
+                    this.appendNewLine()
+                }
+            }
+    }
 
-            this.appendText("\t")
-            this.appendPlaceholder("[description]")
-            this.appendNewLine()
-        }
+    formatAttributes(docstring: interfaces.DocstringParts) {
+        if (docstring.attributes.length > 0) {
+            this.appendText("Attributes\n----------\n")
+            for (let arg of docstring.attributes) {
+                this.appendText(arg.var + " : ")
+                this.appendPlaceholder(`${arg.type}`)
+                this.appendText("\n")
 
-        if (!docstring.kwargs.length) {
-            this.appendNewLine();
+                this.appendText("\t")
+                this.appendPlaceholder("[description]")
+                this.appendNewLine()
+            }
+            if (!docstring.kwargs.length) {
+                this.appendNewLine();
+            }
         }
     }
 

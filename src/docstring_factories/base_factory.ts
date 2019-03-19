@@ -1,4 +1,4 @@
-import { DocstringParts, Decorator, Raises, Returns, removeTypes, addTypePlaceholders } from '../docstring_parts'
+import { DocstringParts, Decorator, Raises, Returns, removeTypes, addTypePlaceholders, DocumentableObjectType } from '../docstring_parts'
 import * as vscode from 'vscode';
 import { print } from 'util';
 
@@ -46,6 +46,9 @@ export abstract class BaseFactory {
             if (docstring.decorators.length > 0) {
                 this.formatDecorators(docstring.decorators);
             }
+            if (docstring.name.type == DocumentableObjectType.Class) {
+                this.formatAttributes(docstring);
+            }
             if (docstring.args.length > 0) {
                 this.formatArguments(docstring);
             }
@@ -87,10 +90,10 @@ export abstract class BaseFactory {
     abstract generateSummary(docstring: DocstringParts): void;
     abstract generateDescription(): void;
     abstract formatDecorators(decorators: Decorator[]): void;
+    abstract formatAttributes(docstring: DocstringParts): void;
     abstract formatArguments(args: DocstringParts): void;
     abstract formatKeywordArguments(kwargs: DocstringParts): void;
     abstract formatRaises(raises: Raises[]): void;
     abstract formatReturns(returns: Returns): void;
-
 }
 

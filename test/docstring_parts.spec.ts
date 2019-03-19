@@ -9,7 +9,7 @@ let expect = chai.expect;
 describe('removeTypes()', () => {
     it('should remove types from the docstringParts', () => {
         let docstringParts = {
-            name: "",
+            name: { "name": "", "type": 1 },
             args: [
                 { var: "param1", type: undefined },
                 { var: "param2", type: "int" },
@@ -21,12 +21,13 @@ describe('removeTypes()', () => {
             returns: { type: "int" },
             raises: [],
             decorators: [],
+            attributes: []
         }
 
         removeTypes(docstringParts)
 
         expect(docstringParts).to.eql({
-            name: "",
+            name: { "name": "", "type": 1 },
             args: [
                 { var: "param1", type: undefined },
                 { var: "param2", type: undefined },
@@ -38,6 +39,7 @@ describe('removeTypes()', () => {
             returns: { type: undefined },
             raises: [],
             decorators: [],
+            attributes: []
         })
     });
 });
@@ -45,7 +47,7 @@ describe('removeTypes()', () => {
 describe('addTypePlaceholders()', () => {
     it('should set all undefined types to a given placeholder', () => {
         let docstringParts = {
-            name: "",
+            name: {"name": "", "type": 1},
             args: [
                 { var: "param1", type: undefined },
                 { var: "param2", type: "int" },
@@ -57,12 +59,13 @@ describe('addTypePlaceholders()', () => {
             returns: { type: undefined },
             raises: [],
             decorators: [],
+            attributes: []
         };
 
         addTypePlaceholders(docstringParts, '[type]');
 
         expect(docstringParts).to.eql({
-            name: "",
+            name: { "name": "", "type": 1 },
             args: [
                 { var: "param1", type: '[type]' },
                 { var: "param2", type: "int" },
@@ -74,6 +77,7 @@ describe('addTypePlaceholders()', () => {
             returns: { type: '[type]' },
             raises: [],
             decorators: [],
+            attributes: []
         });
     });
 });
