@@ -1,7 +1,7 @@
 import chai = require('chai');
 import 'mocha';
 
-import { getFunctionName } from '../../src/parse/get_function_name';
+import { getFunctionName } from '../../src/parse/get_object_name';
 import * as interfaces from '../../src/docstring_parts';
 
 chai.config.truncateThreshold = 0;

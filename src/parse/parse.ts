@@ -2,7 +2,7 @@ import { getDefinition, getBody } from './get_lines'
 import { DocstringParts } from '../docstring_parts'
 import { parseParameters } from './parse_parameters'
 import { tokenizeDefinition } from './tokenize_definition'
-import { getFunctionName } from './get_function_name'
+import { getFunctionName } from './get_object_name'
 
 export function parse(document: string, positionLine: number): DocstringParts {
     let definition = getDefinition(document, positionLine);

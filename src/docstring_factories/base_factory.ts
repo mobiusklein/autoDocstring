@@ -49,17 +49,19 @@ export abstract class BaseFactory {
             if (docstring.name.type == DocumentableObjectType.Class) {
                 this.formatAttributes(docstring);
             }
-            if (docstring.args.length > 0) {
-                this.formatArguments(docstring);
-            }
-            if (docstring.kwargs.length > 0) {
-                this.formatKeywordArguments(docstring);
-            }
-            if (docstring.raises.length > 0) {
-                this.formatRaises(docstring.raises);
-            }
-            if (docstring.returns != undefined) {
-                this.formatReturns(docstring.returns);
+            else {
+                if (docstring.args.length > 0) {
+                    this.formatArguments(docstring);
+                }
+                if (docstring.kwargs.length > 0) {
+                    this.formatKeywordArguments(docstring);
+                }
+                if (docstring.raises.length > 0) {
+                    this.formatRaises(docstring.raises);
+                }
+                if (docstring.returns != undefined) {
+                    this.formatReturns(docstring.returns);
+                }
             }
         }
 
